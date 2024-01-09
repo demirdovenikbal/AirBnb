@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct ListingDetailView: View {
+    var images = ["listing0", "listing1", "listing2", "listing3", "listing4"]
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            ListingImageCarouselView()
+                .frame(height: 320)
+        }
+        .ignoresSafeArea()
     }
 }
 
