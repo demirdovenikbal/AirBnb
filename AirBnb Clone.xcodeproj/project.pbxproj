@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1B4BBF92B51081400DBA17D /* DestinationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B4BBF82B51081400DBA17D /* DestinationSearchView.swift */; };
 		A1D445562B4A36C2002E18A3 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D445552B4A36C2002E18A3 /* ExploreView.swift */; };
 		A1D445582B4A3802002E18A3 /* ListingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D445572B4A3802002E18A3 /* ListingItem.swift */; };
 		A1D4455A2B4A46DF002E18A3 /* SearchAndFilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D445592B4A46DF002E18A3 /* SearchAndFilterBar.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A1B4BBF82B51081400DBA17D /* DestinationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSearchView.swift; sourceTree = "<group>"; };
 		A1D445552B4A36C2002E18A3 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		A1D445572B4A3802002E18A3 /* ListingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingItem.swift; sourceTree = "<group>"; };
 		A1D445592B4A46DF002E18A3 /* SearchAndFilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAndFilterBar.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				A1D445552B4A36C2002E18A3 /* ExploreView.swift */,
 				A1D445592B4A46DF002E18A3 /* SearchAndFilterBar.swift */,
+				A1B4BBF82B51081400DBA17D /* DestinationSearchView.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1D445792B4D3A28002E18A3 /* ListingImageCarouselView.swift in Sources */,
+				A1B4BBF92B51081400DBA17D /* DestinationSearchView.swift in Sources */,
 				A1D775AC2B379359006DBFCB /* ContentView.swift in Sources */,
 				A1D445582B4A3802002E18A3 /* ListingItem.swift in Sources */,
 				A1D445562B4A36C2002E18A3 /* ExploreView.swift in Sources */,

@@ -9,12 +9,27 @@ import SwiftUI
 import MapKit
 
 struct ListingDetailView: View {
+    @Environment(\.dismiss) var dismiss
     var images = ["listing0", "listing1", "listing2", "listing3", "listing4"]
     var body: some View {
         ScrollView {
             //listing image
-            ListingImageCarouselView()
-                .frame(height: 320)
+            ZStack(alignment: .topLeading) {
+                ListingImageCarouselView()
+                    .frame(height: 320)
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundStyle(.black)
+                        .background {
+                            Circle()
+                                .fill(.white)
+                                .frame(width: 32, height: 32)
+                        }
+                        .padding(38)
+                }
+            }
             //details
             VStack(alignment: .leading, spacing: 8) {
                 Text("Miami Villa")
@@ -74,7 +89,7 @@ struct ListingDetailView: View {
                         Spacer()
                     }
                 }
-//                .frame(maxWidth: .infinity, alignment: .leading)
+                //                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
             }
             Divider()
@@ -135,7 +150,15 @@ struct ListingDetailView: View {
                     .padding(.bottom)
                 HStack {
                     VStack(alignment: .leading) {
-                        
+                        Text("500$")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                        Text("Total before taxexs")
+                            .font(.footnote)
+                        Text("July 8 - 10")
+                            .font(.footnote)
+                            .fontWeight(.semibold)
+                            .underline()
                     }
                     Spacer()
                     Button {
