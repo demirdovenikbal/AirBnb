@@ -28,6 +28,7 @@ struct ListingDetailView: View {
                                 .frame(width: 32, height: 32)
                         }
                         .padding(38)
+                        .padding(.top, 25)
                 }
             }
             //details
@@ -70,7 +71,7 @@ struct ListingDetailView: View {
                     .padding(.trailing, 10)
             }
             .padding(.leading)
-            .padding(.top)
+//            .padding(.top)
             Divider()
             //listing features
             VStack(alignment: .leading, spacing: 1) {
@@ -143,7 +144,8 @@ struct ListingDetailView: View {
             }
             .padding()
         }
-        .padding(.bottom, 64)
+        .toolbar(.hidden, for: .tabBar)
+        .padding(.bottom, 125)
         .overlay(alignment: .bottom) {
             VStack {
                 Divider()
@@ -153,7 +155,7 @@ struct ListingDetailView: View {
                         Text("500$")
                             .font(.subheadline)
                             .fontWeight(.semibold)
-                        Text("Total before taxexs")
+                        Text("Total before taxes")
                             .font(.footnote)
                         Text("July 8 - 10")
                             .font(.footnote)
@@ -174,7 +176,7 @@ struct ListingDetailView: View {
                     }
                 }
                 .padding(.horizontal, 32)
-                .padding(.bottom, 30)
+                .padding(.bottom, 45)
                 .padding(.top, 5)
             }
             .background(.white)
