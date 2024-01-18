@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ExploreView: View {
     @State private var showDestinationSearchView = false
+    var listings = PreviewProvider.listings
     var body: some View {
         NavigationStack {
             if showDestinationSearchView {
