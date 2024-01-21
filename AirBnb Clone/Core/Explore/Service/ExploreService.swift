@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+class ExploreService : ObservableObject {
+    func fetchListings() async throws -> [Listing] {
+        return PreviewProvider().listings
+    }
+}
