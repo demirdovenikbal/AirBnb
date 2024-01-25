@@ -7,12 +7,22 @@
 
 import SwiftUI
 
-struct LoginButto_: View {
+struct LoginButton: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            
+        } label: {
+            Text("Login")
+                .foregroundStyle(.white)
+                .fontWeight(.semibold)
+                .font(.subheadline)
+                .frame(width: 360, height: 48)
+                .background(.pink)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+        }
     }
 }
 
 #Preview {
-    LoginButto_()
+    LoginButton()
 }

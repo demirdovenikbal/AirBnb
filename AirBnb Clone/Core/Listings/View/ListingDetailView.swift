@@ -10,12 +10,20 @@ import MapKit
 
 struct ListingDetailView: View {
     @Environment(\.dismiss) var dismiss
-    var images = ["listing0", "listing1", "listing2", "listing3", "listing4"]
+    @State private var cameraPosition : MapCameraPosition
+    let listing : Listing
+    init(listing : Listing) {
+        self.listing = listing
+        let region = MKCoordinateRegion(
+            center: listing.city == "Los Angeles" ? .losAngeles : .miami,
+            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        self._cameraPosition = State(initialValue: .region(region))
+    }
     var body: some View {
         ScrollView {
             //listing image
             ZStack(alignment: .topLeading) {
-                ListingImageCarouselView()
+                ListingImageCarouselView(listing: listing)
                     .frame(height: 320)
                 Button {
                     dismiss()
@@ -33,20 +41,20 @@ struct ListingDetailView: View {
             }
             //details
             VStack(alignment: .leading, spacing: 8) {
-                Text("Miami Villa")
+                Text("\(listing.title)")
                     .font(.title)
                     .fontWeight(.semibold)
                 VStack(alignment: .leading) {
                     HStack(spacing: 2) {
                         Image(systemName: "star.fill")
-                        Text("4.86")
+                        Text("\(listing.rating.formatted())")
                         Text("-")
-                        Text("28 reviews")
+                        Text("\(listing.reviews)")
                             .underline()
                             .fontWeight(.semibold)
                     }
                     .foregroundStyle(.black)
-                    Text("Miami, Florida")
+                    Text("\(listing.city), \(listing.state)")
                 }
                 .font(.caption)
             }
@@ -56,14 +64,14 @@ struct ListingDetailView: View {
             //host info view
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Entire villa hosted by John Smith")
+                    Text("Entire \(listing.type.description) hosted by \(listing.ownerName)")
                         .font(.headline)
                         .frame(width: 250, alignment: .leading)
-                    Text("4 guests - 4 bedrooms - 4 beds - 3 baths")
+                    Text("\(listing.numberOfGuests) guests - \(listing.numberOfBedrooms) bedrooms - \(listing.numberOfBeds) beds - \(listing.numberOfBathrooms) baths")
                         .font(.caption)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                Image("ikbal")
+                Image("\(listing.ownerImageUrl)")
                     .resizable()
                     .frame(width: 64, height: 64)
                     .scaledToFill()
@@ -75,15 +83,15 @@ struct ListingDetailView: View {
             Divider()
             //listing features
             VStack(alignment: .leading, spacing: 1) {
-                ForEach(0..<2) {
+                ForEach(listing.features) {
                     feature in
                     HStack(spacing: 12) {
-                        Image(systemName: "medal")
+                        Image(systemName : feature.imageName)
                         VStack(alignment: .leading) {
-                            Text("Superhost")
+                            Text(feature.title)
                                 .font(.footnote)
                                 .fontWeight(.semibold)
-                            Text("Superhosts are experienced, highly rated hosts who are committed to providing great stars for guests.")
+                            Text(feature.subTitle)
                                 .font(.caption)
                                 .foregroundStyle(.gray)
                         }
@@ -100,7 +108,7 @@ struct ListingDetailView: View {
                     .font(.headline)
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
-                        ForEach(1..<5) {
+                        ForEach(1 ... listing.numberOfBedrooms, id: \.self) {
                             bedroom in
                             VStack {
                                 Image(systemName: "bed.double")
@@ -123,12 +131,12 @@ struct ListingDetailView: View {
             VStack(alignment: .leading, spacing: 16) {
                 Text("What this place offers")
                     .font(.headline)
-                ForEach(0..<5) {
-                    feature in
+                ForEach(listing.amenities) {
+                    amenity in
                     HStack {
-                        Image(systemName: "wifi")
+                        Image(systemName: amenity.imageName)
                             .frame(width: 32)
-                        Text("Wifi")
+                        Text(amenity.title)
                         Spacer()
                     }
                 }
@@ -138,7 +146,7 @@ struct ListingDetailView: View {
             VStack(alignment: .leading, spacing: 16) {
                 Text("Where you'll be")
                     .font(.headline)
-                Map()
+                Map(position: $cameraPosition)
                     .frame(height: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
             }
@@ -152,7 +160,7 @@ struct ListingDetailView: View {
                     .padding(.bottom)
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("500$")
+                        Text("$\(listing.pricePerNight)")
                             .font(.subheadline)
                             .fontWeight(.semibold)
                         Text("Total before taxes")
@@ -186,5 +194,5 @@ struct ListingDetailView: View {
 }
 
 #Preview {
-    ListingDetailView()
+    ListingDetailView(listing: PreviewProvider().listings[0])
 }

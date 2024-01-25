@@ -14,8 +14,8 @@ enum DestinationSearchOptions {
 }
 
 struct DestinationSearchView: View {
+    @ObservedObject var viewModel : ExploreViewModel
     @State var selectedOption : DestinationSearchOptions = .location
-    @State private var destination = ""
     @State private var toDate = Date()
     @State private var fromDate = Date()
     @State private var guests = 2
@@ -26,6 +26,7 @@ struct DestinationSearchView: View {
                 Button {
                     withAnimation {
                         show.toggle()
+                        viewModel.updateListingsForLocation()
                     }
                 } label: {
                     Image(systemName: "xmark.circle")
@@ -33,12 +34,13 @@ struct DestinationSearchView: View {
                         .foregroundStyle(.black)
                 }
                 Spacer()
-                if !destination.isEmpty {
+                if !viewModel.searchText.isEmpty {
                     Button {
-                        destination = ""
+                        viewModel.searchText = ""
                         toDate = Date()
                         fromDate = Date()
                         guests = 2
+                        viewModel.updateListingsForLocation()
                     } label: {
                         Text("Clear")
                             .foregroundStyle(.black)
@@ -58,8 +60,11 @@ struct DestinationSearchView: View {
                         HStack {
                             Image(systemName: "magnifyingglass")
                                 .imageScale(.small)
-                            TextField("Search destinations", text: $destination)
+                            TextField("Search destinations", text: $viewModel.searchText)
                                 .font(.headline)
+                                .onSubmit {
+                                    viewModel.updateListingsForLocation()
+                                }
                         }
                         .frame(height: 44)
                         .padding(.horizontal)
@@ -140,7 +145,8 @@ struct DestinationSearchView: View {
 }
 
 #Preview {
-    DestinationSearchView(show: .constant(false))
+    DestinationSearchView(viewModel: ExploreViewModel(service: ExploreService()),
+                          show: .constant(false))
 }
 
 struct CollapsibleDestinationViewModifier : ViewModifier {

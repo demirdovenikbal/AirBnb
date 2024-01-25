@@ -11,7 +11,7 @@ import SwiftUI
 struct AirBnb_CloneApp: App {
     var body: some Scene {
         WindowGroup {
-            DestinationSearchView(selectedOption: .dates, show: .constant(false))
+            ContentView()
         }
     }
 }
