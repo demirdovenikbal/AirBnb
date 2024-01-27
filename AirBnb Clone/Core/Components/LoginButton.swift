@@ -12,7 +12,7 @@ struct LoginButton: View {
         Button {
             
         } label: {
-            Text("Login")
+            Text("Login!")
                 .foregroundStyle(.white)
                 .fontWeight(.semibold)
                 .font(.subheadline)
